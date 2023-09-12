@@ -18,6 +18,7 @@ class Product (models.Model):
     sku = models.IntegerField(_("Sku"))
     desc = models.TextField(_("Description"),max_length=10000)
     price = models.FloatField(_("Price"))
+    image = models.ImageField(_("Image"),upload_to='products/')
     flag = models.CharField(_("Flag"),max_length=10,choices=FLAG_OPTION)
     quantity = models.IntegerField(_("Quantity"))
     brand = models.ForeignKey('Brand',related_name='product_related',on_delete=models.SET_NULL,null=True,blank=True)
