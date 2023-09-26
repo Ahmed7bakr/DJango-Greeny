@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.validators import MaxValueValidator,MinValueValidator
 from taggit.managers import TaggableManager
+from django.utils.text import slugify
 
 # Create your models here.
 FLAG_OPTION =(
@@ -24,10 +25,20 @@ class Product (models.Model):
     brand = models.ForeignKey('Brand',related_name='product_related',on_delete=models.SET_NULL,null=True,blank=True)
     category = models.ForeignKey('Category',related_name='product_category',on_delete=models.SET_NULL,null=True,blank=True)
     tags = TaggableManager()
+    slug = models.SlugField(null=True,blank=True)
 
     
     def __str__(self):
         return self.name
+    
+
+    def save (self,*args,**kwargs):
+        self.slug = slugify(self.name)
+        super(Product,self).save(*args,**kwargs)
+
+        
+    
+    
     
 
 
