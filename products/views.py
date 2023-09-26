@@ -5,6 +5,15 @@ from django.views.generic import ListView,DetailView
 # Create your views here.
 
 
+def product_list(request):
+
+    products = Product.objects.all()
+
+    return render(request,'products/product_list_test.html',{'products':products})
+
+
+
+
 class ProductList (ListView):
     model = Product 
 
