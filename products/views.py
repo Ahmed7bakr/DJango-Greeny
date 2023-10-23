@@ -16,6 +16,7 @@ def product_list(request):
 
 class ProductList (ListView):
     model = Product 
+    paginate_by = 100
 
 
 class ProductDetail (DetailView):
