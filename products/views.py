@@ -1,48 +1,43 @@
 from django.shortcuts import render
-from .models import Product,Brand,Category
-from django.views.generic import ListView,DetailView
+from .models import Product, Brand, Category
+from django.views.generic import ListView, DetailView
 
 # Create your views here.
 
 
 def product_list(request):
-
     products = Product.objects.all()
 
-    return render(request,'products/product_list_test.html',{'products':products})
+    return render(request, "products/product_list_test.html", {"products": products})
 
 
-
-
-class ProductList (ListView):
-    model = Product 
+class Product_List(ListView):
+    model = Product
     paginate_by = 100
 
 
-class ProductDetail (DetailView):
+class Product_Detail(DetailView):
     model = Product
 
 
-class BrandList (ListView):
+class BrandList(ListView):
     model = Brand
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["categories"] =Category.objects.all()
+        context["categories"] = Category.objects.all()
         return context
 
-class BrandDetail (DetailView):
+
+class BrandDetail(DetailView):
     model = Brand
 
-    def get_context_data(self, **kwargs) :
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         brand = self.get_object()
         context["brand_products"] = Product.objects.filter(brand=brand)
         return context
-    
 
 
-class CategoryList (ListView):
+class CategoryList(ListView):
     model = Category
-
-    
