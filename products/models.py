@@ -21,7 +21,7 @@ class Product(models.Model):
     quantity = models.IntegerField(_("Quantity"))
     brand = models.ForeignKey(
         "Brand",
-        related_name="product_related",
+        related_name="product_brand",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
